@@ -1,7 +1,7 @@
-package com.limitlessmovies.controllers;
+package com.limitlessmoviesapp.controllers;
 
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.services.UserService;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -47,12 +47,9 @@ public class EmailController {
 
         String mailContent = "<p>" + content +"</p>";
 
-        helper.setFrom("leonora.brati@gmail.com","Limitless Movies");
+        helper.setFrom("Personal/Business Email Address","Limitless Movies");
         helper.setTo(new String[]{
-                "eldoradoagalliu@gmail.com",
-                "behijenezha01@gmail.com",
-                "hyrabrat1@gmail.com",
-                "eriga.dulla@gmail.com"});
+                "Add Users Email Addresses"});
 
         helper.setSubject(subject);
         helper.setText(mailContent, true);

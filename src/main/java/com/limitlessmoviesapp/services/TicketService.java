@@ -1,7 +1,7 @@
-package com.limitlessmovies.services;
+package com.limitlessmoviesapp.services;
 
-import com.limitlessmovies.models.Ticket;
-import com.limitlessmovies.repositories.TicketRepository;
+import com.limitlessmoviesapp.models.Ticket;
+import com.limitlessmoviesapp.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +14,15 @@ public class TicketService {
         this.ticketRepo = ticketRepo;
     }
 
-    public List<Ticket> getAllTickets(){
+    public List<Ticket> getAllTickets() {
         return ticketRepo.findAll();
     }
 
-    public Ticket getCinemaTickets(Long cinemaId){
+    public Ticket getCinemaTickets(Long cinemaId) {
         return ticketRepo.findByCinemaIdIs(cinemaId);
     }
 
-    public Ticket getMovieTickets(Long movieId){
+    public Ticket getMovieTickets(Long movieId) {
         return ticketRepo.findByMovieIdIs(movieId);
     }
 

@@ -1,4 +1,4 @@
-package com.limitlessmovies.util;
+package com.limitlessmoviesapp.util;
 
 import org.springframework.web.multipart.MultipartFile;
 

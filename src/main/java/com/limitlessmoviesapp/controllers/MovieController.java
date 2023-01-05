@@ -1,7 +1,7 @@
-package com.limitlessmovies.controllers;
+package com.limitlessmoviesapp.controllers;
 
-import com.limitlessmovies.models.*;
-import com.limitlessmovies.services.*;
+import com.limitlessmoviesapp.models.*;
+import com.limitlessmoviesapp.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -115,7 +115,7 @@ public class MovieController {
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
 
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
             return "edit_movie";
         }
         else {
@@ -128,20 +128,20 @@ public class MovieController {
     }
 
     @DeleteMapping("/admin/movie/delete/{id}")
-    public String deleteMovie(@PathVariable("id") Long movieId){
+    public String deleteMovie(@PathVariable("id") Long movieId) {
         //Attributes to be deleted
         Movie movie = movieService.getMovie(movieId);
         List<User> viewers = userService.getViewers(movie);
         List<Comment> comments = commentService.getMovieComments(movieId);
         List<Cinema> cinemas = cinemaService.getMovieCinemas(movie);
 
-        for(Comment comment : comments){
+        for(Comment comment : comments) {
             commentService.deleteComment(comment);
         }
-        for(Cinema cinema : cinemas){
+        for(Cinema cinema : cinemas) {
             cinema.getMovies().remove(movie);
         }
-        for(User viewer : viewers){
+        for(User viewer : viewers) {
             viewer.getBookedMovies().remove(movie);
         }
         movieService.deleteMovie(movie);

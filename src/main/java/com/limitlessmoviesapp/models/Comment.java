@@ -1,4 +1,4 @@
-package com.limitlessmovies.models;
+package com.limitlessmoviesapp.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -22,7 +22,7 @@ public class Comment {
     @JoinColumn(name="movie_id")
     private Movie movie;
 
-    public Comment(){
+    public Comment() {
 
     }
 

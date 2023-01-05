@@ -19,6 +19,7 @@ header {
     color: white;
     text-decoration: none;
 }
+
 .logout {
     background-color: black;
     color: white;
@@ -34,7 +35,8 @@ header {
 .background {
     background-image: url("../images/email.jpg");
 }
-.content{
+
+.content {
     width: 60%;
     padding: 3%;
     border: none;

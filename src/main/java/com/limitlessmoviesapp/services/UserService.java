@@ -1,9 +1,9 @@
-package com.limitlessmovies.services;
+package com.limitlessmoviesapp.services;
 
-import com.limitlessmovies.models.Movie;
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.repositories.RoleRepository;
-import com.limitlessmovies.repositories.UserRepository;
+import com.limitlessmoviesapp.models.Movie;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.repositories.RoleRepository;
+import com.limitlessmoviesapp.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,15 +37,15 @@ public class UserService {
         return userRepo.findByIdIs(id);
     }
 
-    public User searchUser(String email){
+    public User searchUser(String email) {
         return userRepo.findByEmail(email);
     }
 
-    public List<User> getViewers(Movie movie){
+    public List<User> getViewers(Movie movie) {
         List<User> users = getAllUsers();
         List<User> viewers = new ArrayList<>();
-        for(User user : users){
-            if(user.getBookedMovies().contains(movie)){
+        for(User user : users) {
+            if(user.getBookedMovies().contains(movie)) {
                 viewers.add(user);
             }
         }
@@ -61,11 +61,11 @@ public class UserService {
     }
 
     //A method that checks if the princial exists - TO TEST
-    public Boolean principalExists(Principal principal){
+    public Boolean principalExists(Principal principal) {
         String email = principal.getName();
         User user = searchUser(email);
 
-        if(user == null){
+        if(user == null) {
             return true;
         }
         return false;

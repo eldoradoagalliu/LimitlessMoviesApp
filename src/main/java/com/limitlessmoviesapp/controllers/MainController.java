@@ -1,13 +1,19 @@
-package com.limitlessmovies.controllers;
+package com.limitlessmoviesapp.controllers;
 
-import com.limitlessmovies.models.Cinema;
-import com.limitlessmovies.models.Movie;
-import com.limitlessmovies.models.Ticket;
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.services.CinemaService;
-import com.limitlessmovies.services.MovieService;
-import com.limitlessmovies.services.UserService;
-import com.limitlessmovies.validation.UserValidator;
+import com.limitlessmoviesapp.models.Cinema;
+import com.limitlessmoviesapp.models.Movie;
+import com.limitlessmoviesapp.models.Ticket;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.services.CinemaService;
+import com.limitlessmoviesapp.services.MovieService;
+import com.limitlessmoviesapp.services.UserService;
+import com.limitlessmoviesapp.validation.UserValidator;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -15,18 +21,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,7 +67,8 @@ public class MainController {
         model.addAttribute("movies", movies);
         model.addAttribute("keyword", keyword);
 
-        //API for action movies
+        //Input personal API Key!!!
+        //API for action movies -
         String apiUrl = "https://www.omdbapi.com/?i=tt3896198&apikey=448f5075&s=action";
 
         HttpResponse<JsonNode> jsonNodeHttpResponse = Unirest.get(apiUrl).asJson();
@@ -79,7 +78,7 @@ public class MainController {
         JSONArray jsonArray = object.getJSONArray("Search");
         ArrayList<JSONObject> results = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray.length(); i++){
+        for(int i=0; i<jsonArray.length(); i++) {
             results.add(jsonArray.getJSONObject(i));
         }
         model.addAttribute("resultsAction", results);
@@ -94,7 +93,7 @@ public class MainController {
         JSONArray jsonArray2 = object2.getJSONArray("Search");
         ArrayList<JSONObject> results2 = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray2.length(); i++){
+        for(int i=0; i<jsonArray2.length(); i++) {
             results2.add(jsonArray2.getJSONObject(i));
         }
         model.addAttribute("resultsHorror", results2);
@@ -109,7 +108,7 @@ public class MainController {
         JSONArray jsonArray3 = object3.getJSONArray("Search");
         ArrayList<JSONObject> results3 = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray3.length(); i++){
+        for(int i=0; i<jsonArray3.length(); i++) {
             results3.add(jsonArray3.getJSONObject(i));
         }
         model.addAttribute("resultsComedy", results3);
@@ -124,7 +123,7 @@ public class MainController {
         JSONArray jsonArray4 = object4.getJSONArray("Search");
         ArrayList<JSONObject> results4 = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray4.length(); i++){
+        for(int i=0; i<jsonArray4.length(); i++) {
             results4.add(jsonArray4.getJSONObject(i));
         }
         model.addAttribute("resultsThriller", results4);
@@ -139,7 +138,7 @@ public class MainController {
         JSONArray jsonArray5 = object5.getJSONArray("Search");
         ArrayList<JSONObject> results5 = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray5.length(); i++){
+        for(int i=0; i<jsonArray5.length(); i++) {
             results5.add(jsonArray5.getJSONObject(i));
         }
         model.addAttribute("resultsDrama", results5);
@@ -154,7 +153,7 @@ public class MainController {
         JSONArray jsonArray6 = object6.getJSONArray("Search");
         ArrayList<JSONObject> results6 = new ArrayList<JSONObject>();
 
-        for(int i=0; i<jsonArray6.length(); i++){
+        for(int i=0; i<jsonArray6.length(); i++) {
             results6.add(jsonArray6.getJSONObject(i));
         }
         model.addAttribute("resultsAnime", results6);
@@ -188,7 +187,7 @@ public class MainController {
         return "redirect:/";
     }
 
-//     This method will authenticate the newly registered users
+    //This method will authenticate the newly registered users
     public void authWithHttpServletRequest(HttpServletRequest request, String email, String password) {
         try {
             request.login(email, password);

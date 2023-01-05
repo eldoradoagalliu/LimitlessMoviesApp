@@ -1,13 +1,13 @@
-package com.limitlessmovies.controllers;
+package com.limitlessmoviesapp.controllers;
 
-import com.limitlessmovies.models.Cinema;
-import com.limitlessmovies.models.Movie;
-import com.limitlessmovies.models.Ticket;
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.services.CinemaService;
-import com.limitlessmovies.services.MovieService;
-import com.limitlessmovies.services.TicketService;
-import com.limitlessmovies.services.UserService;
+import com.limitlessmoviesapp.models.Cinema;
+import com.limitlessmoviesapp.models.Movie;
+import com.limitlessmoviesapp.models.Ticket;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.services.CinemaService;
+import com.limitlessmoviesapp.services.MovieService;
+import com.limitlessmoviesapp.services.TicketService;
+import com.limitlessmoviesapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +65,7 @@ public class CinemaController {
                            Model model) {
         User cinemaCreator = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", cinemaCreator);
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
             model.addAttribute("cinema", cinema);
             return "new_cinema";
         }
@@ -98,7 +98,7 @@ public class CinemaController {
                              @PathVariable("id") Long cinemaId, Model model) {
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
-        if(result.hasErrors()){
+        if(result.hasErrors()) {
             return "edit_cinema";
         }
         else {
@@ -118,7 +118,7 @@ public class CinemaController {
         Cinema cinema = cinemaService.getCinema(cinemaId);
         List<Movie> movies = movieService.getAllMovies(null);
 
-        for(Movie movie : movies){
+        for(Movie movie : movies) {
             movie.getCinemas().remove(cinema);
         }
         cinemaService.deleteCinema(cinema);
@@ -152,7 +152,7 @@ public class CinemaController {
 
     public Date getDateFromString(String dateString) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        java.util.Date parsed = null;
+        Date parsed = null;
         try {
             parsed = format.parse(dateString);
         } catch (ParseException e) {

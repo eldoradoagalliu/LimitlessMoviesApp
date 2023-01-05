@@ -90,8 +90,8 @@
     }
     window.initMap = initMap;
 </script>
-<%--API Key--%>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHQV4LenUiXtgJlf2HbyAMEBl3cSsHGi0&callback=initMap&v=weekly"
+<%--API Key - Insert your Google Maps API Key--%>
+<script src="https://maps.googleapis.com/maps/api/js?key=your_key&callback=initMap&v=weekly"
         defer>
 </script>
 </body>

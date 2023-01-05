@@ -1,4 +1,4 @@
-package com.limitlessmovies.config;
+package com.limitlessmoviesapp.config;
 
 import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
 import org.springframework.context.annotation.Configuration;

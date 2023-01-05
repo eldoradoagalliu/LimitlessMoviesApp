@@ -1,8 +1,8 @@
-package com.limitlessmovies.services;
+package com.limitlessmoviesapp.services;
 
-import com.limitlessmovies.models.Role;
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.repositories.UserRepository;
+import com.limitlessmoviesapp.models.Role;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +31,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthorities(user));
     }
 
-    private List<GrantedAuthority> getAuthorities(User user){
+    private List<GrantedAuthority> getAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for(Role role : user.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getName());

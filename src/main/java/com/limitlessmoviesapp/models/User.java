@@ -1,4 +1,4 @@
-package com.limitlessmovies.models;
+package com.limitlessmoviesapp.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -98,7 +98,7 @@ public class User {
     @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
     private List<Comment> movieComments;
 
-    public User(){
+    public User() {
 
     }
 

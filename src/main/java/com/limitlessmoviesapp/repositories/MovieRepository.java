@@ -1,6 +1,6 @@
-package com.limitlessmovies.repositories;
+package com.limitlessmoviesapp.repositories;
 
-import com.limitlessmovies.models.Movie;
+import com.limitlessmoviesapp.models.Movie;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

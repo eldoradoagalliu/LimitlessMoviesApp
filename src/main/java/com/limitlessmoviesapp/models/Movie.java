@@ -1,4 +1,4 @@
-package com.limitlessmovies.models;
+package com.limitlessmoviesapp.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

@@ -1,8 +1,8 @@
-package com.limitlessmovies.controllers;
+package com.limitlessmoviesapp.controllers;
 
-import com.limitlessmovies.models.User;
-import com.limitlessmovies.services.UserService;
-import com.limitlessmovies.util.FileUploadUtil;
+import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.services.UserService;
+import com.limitlessmoviesapp.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

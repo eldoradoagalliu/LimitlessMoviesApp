@@ -1,8 +1,8 @@
-package com.limitlessmovies.services;
+package com.limitlessmoviesapp.services;
 
-import com.limitlessmovies.models.Cinema;
-import com.limitlessmovies.models.Movie;
-import com.limitlessmovies.repositories.MovieRepository;
+import com.limitlessmoviesapp.models.Cinema;
+import com.limitlessmoviesapp.models.Movie;
+import com.limitlessmoviesapp.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class MovieService {
         this.movieRepo = movieRepo;
     }
 
-    public Movie getMovie(Long id){
+    public Movie getMovie(Long id) {
         return movieRepo.findByIdIs(id);
     }
 

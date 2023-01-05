@@ -1,7 +1,7 @@
-package com.limitlessmovies.services;
+package com.limitlessmoviesapp.services;
 
-import com.limitlessmovies.models.Comment;
-import com.limitlessmovies.repositories.CommentRepository;
+import com.limitlessmoviesapp.models.Comment;
+import com.limitlessmoviesapp.repositories.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public class CommentService {
         this.commentRepo = commentRepo;
     }
 
-    public List<Comment> getAllComments(){
+    public List<Comment> getAllComments() {
         return commentRepo.findAll();
     }
 
-    public List<Comment> getMovieComments(Long id){
+    public List<Comment> getMovieComments(Long id) {
         return commentRepo.findByMovieIdIs(id);
     }
 

@@ -1,6 +1,4 @@
-package com.limitlessmovies.models;
-
-import org.springframework.format.annotation.DateTimeFormat;
+package com.limitlessmoviesapp.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;

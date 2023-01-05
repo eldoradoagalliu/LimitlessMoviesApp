@@ -1,6 +1,6 @@
-package com.limitlessmovies.validation;
+package com.limitlessmoviesapp.validation;
 
-import com.limitlessmovies.models.User;
+import com.limitlessmoviesapp.models.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
