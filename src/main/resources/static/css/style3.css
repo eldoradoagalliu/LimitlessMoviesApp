@@ -1,0 +1,27 @@
+body {
+    margin-top: 30px;
+    color: aliceblue;
+    background-repeat:no-repeat;
+    background-position: top;
+}
+
+.bg-image {
+    background-image: url("../images/new_cinema.png");
+}
+
+.bg-image2 {
+    background-image: url("../images/edit_cinema.png");
+}
+
+input {
+    font-size: large;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.cinema {
+    position: absolute;
+    top: 160px;
+    left: 380px;
+}

@@ -1,0 +1,134 @@
+.description {
+    width: 100%;
+    height: 220px;
+    background-color: #7a997b61;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.movie-card {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.image-card {
+    width: 250px;
+    height: 380px;
+    border-radius: 5px;
+}
+
+.style-p {
+    color: red;
+}
+
+.style-a {
+    color: white;
+    text-decoration: none;
+}
+
+.genre {
+    color: white;
+    font-weight: bolder;
+}
+
+.table {
+    background-color: #304d31;
+}
+
+.style-table {
+    color: white;
+    text-align: center;
+}
+
+header {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+#title-main {
+    color: white;
+    text-decoration: none;
+}
+
+#title-secondary {
+    color: white;
+}
+
+.nav-item #profile-style {
+    color: white;
+    text-decoration: none;
+}
+
+#profile-style {
+    font-size: 16px;
+}
+
+.page-body {
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    background-color: dimgray;
+}
+
+.button {
+    background-color: rgba(158, 178, 190, 0.18);
+    border: none;
+    border-radius: 5px;
+    font-weight: inherit;
+}
+
+.logout {
+    background-color: black;
+    color: white;
+}
+
+#title-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.background {
+    background-image: url("../images/movie_details.jpg");
+    background-position: top;
+}
+
+.content {
+    margin: 9% 2% 2% 2% ;
+    padding: 1%;
+    border: none;
+    background-color: rgba(180, 196, 210, 0.9);
+    color: black;
+    font-weight: 600;
+}
+
+.comments {
+    border: 3px solid #4b7ba8;
+    padding: 1%;
+    overflow-y: auto;
+    height: 150px;
+    margin-top: 10px;
+    background-color: rgba(176,194,217,0.95);
+}
+
+.comments span {
+    color: blue;
+    font-weight: bold;
+}
+
+.send-comments {
+    margin-top: 1%;
+}
+
+.movie {
+    position: absolute;
+    top: 150px;
+    left: 720px;
+}

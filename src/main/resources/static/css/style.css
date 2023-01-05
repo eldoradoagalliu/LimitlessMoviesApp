@@ -1,0 +1,29 @@
+.admin-bg-image {
+    background-image: url("../images/admin.png");
+    background-position: top;
+}
+
+.profile {
+    background-image: url("../images/user_details.png");
+}
+
+.edit-profile {
+    background-image: url("../images/edit_user.webp");
+}
+
+.black-color {
+    color: black;
+    text-decoration: none;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+
+.edit-profile-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 10%;
+}
