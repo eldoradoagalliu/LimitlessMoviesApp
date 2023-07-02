@@ -1,7 +1,7 @@
-#Limitless Movies Application
+# Limitless Movies App
 
-Limitless Movies Web Application is a movie website build with Java SE 8, Spring Framework, 
-Spring MVC, Spring Security, MySQL, HTML, CSS and Bootstrap that consists of :
+Limitless Movies Application is a movie website built with Java SE 8, Spring Framework, 
+Spring MVC, Spring Security, MySQL, HTML, CSS and Bootstrap that consists of:
 1. User Login/Registration
 2. User Home Page (includes a Search Bar)
 3. Admin Dashboard
@@ -13,5 +13,5 @@ Spring MVC, Spring Security, MySQL, HTML, CSS and Bootstrap that consists of :
 9. Movie Comments Section
 10. Email Service for the Latest Movies Added
 
-To implement this app you need to modify the database url & details, also the email properties 
-found in application.properties & EmailController.java file.
+To implement this app you need to modify the database url & details, email address properties 
+in application.properties & EmailController.java file.
