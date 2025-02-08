@@ -1,6 +1,6 @@
 package com.limitlessmoviesapp.validation;
 
-import com.limitlessmoviesapp.models.User;
+import com.limitlessmoviesapp.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -16,7 +16,7 @@ public class UserValidator implements Validator {
     public void validate(Object object, Errors errors) {
         User user = (User) object;
 
-        if(!user.getConfirm().equals(user.getPassword())) {
+        if (!user.getConfirm().equals(user.getPassword())) {
             errors.rejectValue("confirm", "Match");
         }
     }

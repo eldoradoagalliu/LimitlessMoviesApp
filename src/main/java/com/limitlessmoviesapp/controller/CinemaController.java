@@ -1,20 +1,26 @@
-package com.limitlessmoviesapp.controllers;
+package com.limitlessmoviesapp.controller;
 
-import com.limitlessmoviesapp.models.Cinema;
-import com.limitlessmoviesapp.models.Movie;
-import com.limitlessmoviesapp.models.Ticket;
-import com.limitlessmoviesapp.models.User;
-import com.limitlessmoviesapp.services.CinemaService;
-import com.limitlessmoviesapp.services.MovieService;
-import com.limitlessmoviesapp.services.TicketService;
-import com.limitlessmoviesapp.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.limitlessmoviesapp.model.Cinema;
+import com.limitlessmoviesapp.model.Movie;
+import com.limitlessmoviesapp.model.Ticket;
+import com.limitlessmoviesapp.model.User;
+import com.limitlessmoviesapp.service.CinemaService;
+import com.limitlessmoviesapp.service.MovieService;
+import com.limitlessmoviesapp.service.TicketService;
+import com.limitlessmoviesapp.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,22 +28,17 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CinemaController {
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private CinemaService cinemaService;
-
-    @Autowired
-    private MovieService movieService;
-
-    @Autowired
-    private TicketService ticketService;
+    private final UserService userService;
+    private final CinemaService cinemaService;
+    private final MovieService movieService;
+    private final TicketService ticketService;
 
     @GetMapping("/cinema/{id}")
     public String cinemaDetails(Principal principal, @PathVariable("id") Long cinemaId, Model model) {
-        if(userService.principalExists(principal)) return "redirect:/logout";
+        if (userService.principalExists(principal)) return "redirect:/logout";
 
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
@@ -52,29 +53,30 @@ public class CinemaController {
 
     @GetMapping("/admin/cinema/new")
     public String addCinema(Principal principal, @ModelAttribute("cinema") Cinema cinema, Model model) {
-        if(userService.principalExists(principal)) return "redirect:/logout";
-
+        if (userService.principalExists(principal)) return "redirect:/logout";
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
-
         return "new_cinema";
     }
 
     @PostMapping("/admin/cinema/new")
     public String addCinema(Principal principal, @Valid @ModelAttribute("cinema") Cinema cinema, BindingResult result,
-                           Model model) {
+                            Model model) {
         User cinemaCreator = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", cinemaCreator);
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             model.addAttribute("cinema", cinema);
             return "new_cinema";
-        }
-        else {
-            Cinema newCinema = new Cinema(cinema.getCinemaName(), cinema.getLatitude(), cinema.getLongitude(),
-                                          cinemaCreator);
-            //New cinema saved in DB
+        } else {
+            Cinema newCinema = Cinema.builder()
+                    .cinemaName(cinema.getCinemaName())
+                    .latitude(cinema.getLatitude())
+                    .longitude(cinema.getLongitude())
+                    .cinemaCreator(cinemaCreator)
+                    .build();
+            // New cinema saved in DB
             cinemaService.updateCinema(newCinema);
-            //New cinema added to the list of cinemas
+            // New cinema added to the list of cinemas
             cinemaCreator.getCinemasCreated().add(newCinema);
             userService.updateUser(cinemaCreator);
             return "redirect:/admin";
@@ -83,7 +85,7 @@ public class CinemaController {
 
     @GetMapping("/admin/cinema/edit/{id}")
     public String editCinema(Principal principal, @PathVariable("id") Long cinemaId, Model model) {
-        if(userService.principalExists(principal)) return "redirect:/logout";
+        if (userService.principalExists(principal)) return "redirect:/logout";
 
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
@@ -98,12 +100,11 @@ public class CinemaController {
                              @PathVariable("id") Long cinemaId, Model model) {
         User currentUser = userService.searchUser(principal.getName());
         model.addAttribute("currentUser", currentUser);
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "edit_cinema";
-        }
-        else {
+        } else {
             Cinema editedCinema = cinemaService.getCinema(cinemaId);
-            //Attributes to be edited
+            // Attributes to be edited
             editedCinema.setCinemaName(cinema.getCinemaName());
             editedCinema.setLatitude(cinema.getLatitude());
             editedCinema.setLongitude(cinema.getLongitude());
@@ -113,12 +114,12 @@ public class CinemaController {
     }
 
     @DeleteMapping("/admin/cinema/delete/{id}")
-    public String deleteCinema(Principal principal, @PathVariable("id") Long cinemaId) {
-        //Attributes to be deleted
+    public String deleteCinema(@PathVariable("id") Long cinemaId) {
+        // Attributes to be deleted
         Cinema cinema = cinemaService.getCinema(cinemaId);
         List<Movie> movies = movieService.getAllMovies(null);
 
-        for(Movie movie : movies) {
+        for (Movie movie : movies) {
             movie.getCinemas().remove(cinema);
         }
         cinemaService.deleteCinema(cinema);
@@ -145,20 +146,26 @@ public class CinemaController {
 
         String dateString = date + " " + time;
 
-        Ticket newTicket = new Ticket(ticket.getPrice(), getDateFromString(dateString), cinema, movie);
+        Ticket newTicket = Ticket.builder()
+                .price(ticket.getPrice())
+                .cinemaDisplayTime(getDateFromString(dateString))
+                .cinema(cinema)
+                .movie(movie)
+                .build();
         ticketService.updateTicket(newTicket);
         return "redirect:/admin";
     }
 
     public Date getDateFromString(String dateString) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        Date parsed = null;
+        long time = 0;
+        Date parsed;
         try {
             parsed = format.parse(dateString);
+            time = parsed.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Date date = new Date(parsed.getTime());
-        return date;
+        return new Date(time);
     }
 }
