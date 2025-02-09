@@ -175,9 +175,9 @@ public class MainController {
 
         // First User will be made Admin
         if (userService.getAllUsers().isEmpty()) {
-            userService.createUser(user, "ROLE_ADMIN");
+            userService.createUser(user, "ADMIN");
         } else {
-            userService.createUser(user, "ROLE_USER");
+            userService.createUser(user, "USER");
         }
 
         authWithHttpServletRequest(request, user.getEmail(), password);
@@ -206,7 +206,7 @@ public class MainController {
     }
 
     // Admin
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String adminPage(Principal principal, @ModelAttribute("ticket") Ticket ticket, Model model) {
         if (userService.principalExists(principal)) return "redirect:/logout";
 
